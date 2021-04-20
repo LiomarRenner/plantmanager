@@ -1,10 +1,16 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { StyleSheet, Text, SafeAreaView, Image, TouchableOpacity } from 'react-native';
 
 import wateringImg from '../../assets/watering.png';
 import colors from '../../../styles/colors';
 
 function Welcome(){
+    const [visible, setVisible] = useState(false);
+
+    function handleVisibility(){
+        setVisible(true);
+    }
+
     return(
 
         <SafeAreaView style={styles.container}>
@@ -20,8 +26,10 @@ function Welcome(){
                 Nós cuidamos de lembrar você sempre que precisar.
             </Text>
 
-            <TouchableOpacity style={styles.button}>
-                <Text> > </Text>
+            <TouchableOpacity 
+            style={styles.button} 
+            onPress={handleVisibility}>
+                <Text> {'>'} </Text>
             </TouchableOpacity>
 
         </SafeAreaView>
