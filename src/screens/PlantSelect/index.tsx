@@ -35,7 +35,23 @@ interface PlantProps {
 export function PlantSelect(){
     const [environments, setEnvironments] = useState<EnvironmentProps[]>([]);
     const [plants, setPlants] = useState<PlantProps[]>([]);
+    const [filteredPlants, setFilteredPlants] = useState<PlantProps[]>([]);
+    const [environmentSelected, setEnvironmentSelected] = useState('all');
 
+    function handleEnvironmentSelected(environment: string){
+        setEnvironmentSelected(environment);
+
+        if(environmentSelected === 'all'){
+            return setFilteredPlants(plants);
+        }
+
+        const filtered = plants.filter(plants => 
+            plants.environments.includes(environment)
+        );
+
+        setFilteredPlants(filtered);
+    }
+    
     useEffect(() => {
         async function fetchEnvironment(){
             const { data } = await api.get('plants_environments');
@@ -53,7 +69,8 @@ export function PlantSelect(){
 
     useEffect(() => {
         async function fetchPlants(){
-            const { data } = await api.get('plants');
+            const { data } = await api
+            .get('plants?_sort=name&_order=asc');
             setPlants(data);
         }
 
@@ -75,7 +92,11 @@ export function PlantSelect(){
                 <FlatList 
                     data={environments}
                     renderItem={({ item }) => (
-                        <EnvironmentButton title={item.title} />
+                        <EnvironmentButton 
+                            title={item.title} 
+                            active={item.key === environmentSelected}
+                            onPress={() => handleEnvironmentSelected(item.key)  }
+                        />
                     )}
                     horizontal
                     showsHorizontalScrollIndicator={false}
@@ -85,13 +106,16 @@ export function PlantSelect(){
 
             <View style={styles.plants}>
                 <FlatList 
-                    data={plants}
+                    data={filteredPlants}
                     renderItem={({ item }) => (
                         <PlantCardPrimary
                             data={item}
                         />    
                     )}
                     showsVerticalScrollIndicator={false}
+                    numColumns={2}
+                    contentContainerStyle={styles.contentContainerStyle}
+                    
                 />
             </View>
 
@@ -132,5 +156,8 @@ const styles = StyleSheet.create({
         flex:1,
         paddingHorizontal:32,
         justifyContent:'center',
-    }
+    },
+    contentContainerStyle: {
+        
+    },
 });
