@@ -9,9 +9,12 @@ import {
     TouchableWithoutFeedback,
     Platform,
     Keyboard,
+    Alert
 } from 'react-native';
 
 import { useNavigation } from '@react-navigation/core';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
 import colors from '../../../styles/colors';
 import fonts from '../../../styles/fonts';
 
@@ -35,7 +38,12 @@ function UserIdentification(){
         setName(value);
     }
 
-    function handleSubmit(){
+    async function handleSubmit(){
+        if(!name){
+            return Alert.alert('As plantinhas precisam saber seu nome');
+        }
+        await AsyncStorage.setItem('@plantmanager:user', name);
+
         navigation.navigate('Confirmation');
     }
 
