@@ -19,24 +19,14 @@ import fonts from '../../../styles/fonts';
 import { Button } from '../../components/Button';
 import { getBottomSpace } from 'react-native-iphone-x-helper';
 import { format, isBefore } from 'date-fns';
+import { PlantProps } from '../../libs/storage';
 interface Params {
-    plant: {
-        id: string;
-        name: string;
-        about: string;
-        water_tips: string;
-        photo: string;
-        environments: [string]; 
-        frequency: {
-            times: number;
-            repeat_every: string;
-        }
-    }
+    plant: PlantProps
 }
 
 export function PlantSave(){
     const route = useRoute();
-    const { plant} = route.params as Params; 
+    const { plant } = route.params as Params; 
     const [selectedDateTime, setSelectedDateTime] = useState(new Date());
     const [showDatePicker, setShowDatePicker] = useState(Platform.OS == 'ios');
 
