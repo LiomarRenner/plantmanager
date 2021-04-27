@@ -43,7 +43,7 @@ const AppRoutes: React.FC = () => (
         <stackRoutes.Screen 
             name="PlantSave"
             component={PlantSave}
-        />
+        /> 
 
     </stackRoutes.Navigator>
 )
