@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {
     StyleSheet,
     Alert,
@@ -11,6 +11,7 @@ import {
 }from 'react-native';
 import { SvgFromUri } from 'react-native-svg';
 import { useRoute } from '@react-navigation/core';
+import DateTimePicker, { Event } from '@react-native-community/datetimepicker';
 
 import waterdrop from '../../assets/waterdrop.png';
 import colors from '../../../styles/colors';
@@ -35,6 +36,20 @@ interface Params {
 export function PlantSave(){
     const route = useRoute();
     const { plant} = route.params as Params; 
+    const [selectedDateTime, setSelectedDateTime] = useState(new Date());
+    const [showDatePicker, setShowDatePicker] = useState(Platform.OS == 'ios');
+
+    function handleChangeTime(event: Event, dateTime: Date | undefined){
+        if(Platform.OS === 'android'){
+            setShowDatePicker(oldState => !oldState);
+        }
+
+        if(dateTime){
+            setSelectedDateTime(new Date());
+
+            return Alert.alert('escolha uma hora no futuro');
+        }
+    }
 
     return (
         <View style={styles.container}>
@@ -67,6 +82,13 @@ export function PlantSave(){
             <Text style={styles.alertLabel}>
                 Escolha o melhor horário para ser lembrado: 
             </Text>
+            
+            <DateTimePicker
+                value={ selectedDateTime }
+                mode='time'
+                display='spinner'
+                onChange={handleChangeTime}
+            />
 
             <Button
                 title="Cadastrar planta"
