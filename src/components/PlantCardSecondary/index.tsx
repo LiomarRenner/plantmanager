@@ -55,7 +55,7 @@ const styles = StyleSheet.create({
         fontFamily: fonts.heading,
         marginLeft: 8,
         fontSize: 18,
-        color: colors.heading
+        color: colors.heading,
     },
     details: {
         alignItems: 'flex-end',
