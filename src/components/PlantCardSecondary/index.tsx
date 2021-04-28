@@ -2,6 +2,7 @@ import React from 'react';
 import {
     Text,
     StyleSheet,
+    View
 } from 'react-native';
 import { RectButton, RectButtonProps} from 'react-native-gesture-handler';
 import { SvgFromUri } from 'react-native-svg';
@@ -13,6 +14,7 @@ interface PlantProps extends RectButtonProps {
     data: {
         name: string;
         photo: string;
+        hour: string;
     }
 }
 
@@ -22,27 +24,52 @@ export const PlantCardSecondary = ({ data, ...rest} : PlantProps) => {
             style={styles.container}
             {...rest}
         >   
-            <SvgFromUri uri={data.photo} width={70} height={70}/>
+            <SvgFromUri uri={data.photo} width={50} height={50}/>
+
             <Text style={styles.title}>
                 { data.name}
             </Text>
+            
+            <View style={styles.details}>
+                <Text style={styles.timeLabel}> Regar as plantas </Text>
+                <Text style={styles.time}> { data.hour } </Text>
+            </View>
+
         </RectButton>    
     )
 }
 
 const styles = StyleSheet.create({
     container: {
-        flex:1,
-        maxWidth: '45%',
-        backgroundColor: colors.shape,
-        borderRadius: 20,
-        paddingVertical: 10,
+        width:'100%',
+        paddingHorizontal: 10,
+        paddingVertical: 25,
+        borderRadius:20,
+        flexDirection: 'row',
         alignItems: 'center',
-        margin: 10
+        backgroundColor: colors.shape,
+        marginVertical: 5,
     },
     title: {
-        color: colors.green_dark,
+        flex: 1,
         fontFamily: fonts.heading,
-        marginVertical: 16
+        marginLeft: 8,
+        fontSize: 18,
+        color: colors.heading
     },
+    details: {
+        alignItems: 'flex-end',
+    },
+    timeLabel: {
+        marginTop: 5,
+        fontSize: 14,
+        fontFamily: fonts.text,
+        color: colors.body_light,
+    },
+    time: {
+        marginTop: 5,
+        fontSize: 16,
+        fontFamily: fonts.heading,
+        color: colors.body_dark,
+    }
 })

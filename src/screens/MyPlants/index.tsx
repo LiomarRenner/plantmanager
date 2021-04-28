@@ -14,6 +14,7 @@ import fonts from '../../../styles/fonts';
 import { loadPlant, PlantProps } from '../../libs/storage';
 import { formatDistance } from 'date-fns';
 import { pt } from 'date-fns/locale';
+import { PlantCardSecondary } from '../../components/PlantCardSecondary';
 
 export function MyPlants(){
     const [loading, setLoading] = useState(true);
@@ -63,7 +64,7 @@ export function MyPlants(){
                 data={myPlants}
                 keyExtractor={(item) => String(item.id)}
                 renderItem={({ item }) => (
-                    <Text>Elemento</Text>
+                    <PlantCardSecondary data={item} />
                 )}
                 showsVerticalScrollIndicator={false}
                 contentContainerStyle={{ flex: 1 }}
