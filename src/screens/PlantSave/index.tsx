@@ -1,11 +1,10 @@
-import React, {useEffect, useState} from 'react';
+import React, { useState} from 'react';
 import {
     StyleSheet,
     Alert,
     Text,
     View,
     Image,
-    ScrollView,
     Platform,
     TouchableOpacity,
 }from 'react-native';
@@ -19,7 +18,7 @@ import fonts from '../../../styles/fonts';
 import { Button } from '../../components/Button';
 import { getBottomSpace } from 'react-native-iphone-x-helper';
 import { format, isBefore } from 'date-fns';
-import { loadPlant, PlantProps, savePlant } from '../../libs/storage';
+import {  PlantProps, savePlant } from '../../libs/storage';
 interface Params {
     plant: PlantProps
 }
