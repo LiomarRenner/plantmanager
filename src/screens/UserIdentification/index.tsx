@@ -42,9 +42,13 @@ function UserIdentification(){
         if(!name){
             return Alert.alert('As plantinhas precisam saber seu nome');
         }
-        await AsyncStorage.setItem('@plantmanager:user', name);
-
-        navigation.navigate('Confirmation');
+        try{
+            await AsyncStorage.setItem('@plantmanager:user', name);
+            navigation.navigate('Confirmation');
+        }catch{
+           Alert.alert('Não foi posssível salvar o seu nome');  
+        }
+        
     }
 
     return(
