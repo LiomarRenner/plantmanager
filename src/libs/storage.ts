@@ -44,7 +44,7 @@
     }
  }
 
- export async function loadPlant() : Promise<StoragePlantProps>{
+ export async function loadPlant() : Promise<PlantProps[]>{
     try {
         const data = await AsyncStorage.getItem('@plantmanager:plants');
         const plants = data ? (JSON.parse(data) as StoragePlantProps) : {};
