@@ -15,6 +15,7 @@ import { loadPlant, PlantProps } from '../../libs/storage';
 import { formatDistance } from 'date-fns';
 import { pt } from 'date-fns/locale';
 import { PlantCardSecondary } from '../../components/PlantCardSecondary';
+import { Load } from '../../components/Load';
 
 export function MyPlants(){
     const [loading, setLoading] = useState(true);
@@ -42,6 +43,9 @@ export function MyPlants(){
         loadStorageData();
 
     },[])
+
+    if(loading)
+        return <Load />
 
     return (
         <View style={styles.container}>
