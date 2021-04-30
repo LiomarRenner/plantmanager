@@ -70,7 +70,10 @@ export function PlantSave(){
     }
 
     return (
-        <ScrollView>
+        <ScrollView
+            showsVerticalScrollIndicator={false}
+            contentContainerStyle={styles.container}
+        >
 
         <View style={styles.container}>
 
