@@ -7,6 +7,7 @@ import {
     Image,
     Platform,
     TouchableOpacity,
+    ScrollView,
 }from 'react-native';
 import { SvgFromUri } from 'react-native-svg';
 import { useNavigation, useRoute } from '@react-navigation/core';
@@ -69,6 +70,8 @@ export function PlantSave(){
     }
 
     return (
+        <ScrollView>
+
         <View style={styles.container}>
 
         <View style={styles.plantInfo}>
@@ -127,6 +130,8 @@ export function PlantSave(){
         </View>
 
         </View>
+
+        </ScrollView>
     )
 }
 
