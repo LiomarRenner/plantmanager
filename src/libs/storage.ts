@@ -21,6 +21,7 @@
 export interface StoragePlantProps {
      [id: string]: {
          data: PlantProps;
+         notificationId: string;
      }
  }
 
@@ -38,7 +39,7 @@ export interface StoragePlantProps {
         }
 
         const seconds = Math.abs(
-            Math.ceil(now.getTime() - nextTime.getTime() / 1000)
+            Math.ceil(now.getTime() - nextTime.getTime()) / 1000
         )
         
         const notificationsId = await Notifications.scheduleNotificationAsync({
@@ -56,7 +57,7 @@ export interface StoragePlantProps {
                 seconds: seconds < 60 ? 60 : seconds,
                 repeats: true
             }
-        })
+        });
 
         const data = await AsyncStorage.getItem('@plantmanager:plants');
         const oldPlants = data ? (JSON.parse(data) as StoragePlantProps) : {};
@@ -109,6 +110,8 @@ export interface StoragePlantProps {
  export async function removePlant(id: string) : Promise<void> {
     const data = await AsyncStorage.getItem('@plantmanager:plants');
     const plants = data ? (JSON.parse(data) as StoragePlantProps) : {};
+
+    await Notifications.cancelScheduledNotificationAsync(plants[id].notificationId );
     
     delete plants[id];
 
