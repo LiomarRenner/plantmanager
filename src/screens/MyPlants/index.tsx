@@ -94,7 +94,7 @@ export function MyPlants(){
                 renderItem={({ item }) => (
                     <PlantCardSecondary 
                         data={item}
-                        handleRemove={() => {handleRemove()}} 
+                        handleRemove={() => {handleRemove(myPlants)}} 
                     />
                 )}
                 showsVerticalScrollIndicator={false}
